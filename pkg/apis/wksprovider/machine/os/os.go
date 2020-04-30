@@ -498,7 +498,7 @@ func (o OS) applySeedNodePlan(p *plan.Plan) error {
 	if err != nil {
 		log.Errorf("Apply of Plan failed:\n%s\n", err)
 	}
-	return nil
+	return err
 }
 
 func planParametersToConfigMapManifest(plan []byte, ns string) ([]byte, error) {
