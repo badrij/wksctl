@@ -377,7 +377,7 @@ func TestApply(t *testing.T) {
 		PrivateKeyPath: sshKeyPath,
 		PrintOutputs:   true,
 	})
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	err = writeTmpFile(sshClient, "/tmp/workspace/cmd/mock-https-authz-server/server", "authserver")
 	assert.NoError(t, err)
 	for _, authFile := range []string{"rootCA.pem", "server.crt", "server.key"} {
@@ -396,7 +396,7 @@ func TestApply(t *testing.T) {
 		"--config-directory="+configDir, "--sealed-secret-key="+configPath("ss.key"), "--sealed-secret-cert="+configPath("ss.cert"),
 		"--verbose=true", "--ssh-key="+sshKeyPath)
 	assert.NoError(t, err)
-	assert.Equal(t, 0, run.ExitCode())
+	require.Equal(t, 0, run.ExitCode())
 
 	// Extract the kubeconfig,
 	run, err = kubeconfig(exe, "--cluster="+configPath("cluster.yaml"), "--machines="+configPath("machines.yaml"), "--namespace=default", "--ssh-key="+sshKeyPath)
